@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class createArena : MonoBehaviour {
+public class CreateArena : NetworkBehaviour {
 
     public int numPlayers = 4;                           //number of points on radius to place prefabs
     public Vector3 centerPos = new Vector3(0, 0, 32);    //center of circle/elipsoid
@@ -14,7 +15,7 @@ public class createArena : MonoBehaviour {
                                                      //*is set during each iteration of the loop
 
     // Use this for initialization
-    void Start()
+    public override void OnStartServer()
     {
         for (int i = 0; i < numPlayers; i++)
         {
