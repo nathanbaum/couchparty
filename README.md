@@ -1,2 +1,2 @@
-# UnityNetworkingTutorial
-a slightly improved version of Unity's multiplayer tutorial
+# CouchPartyVR
+a slightly improved version of Marioparty built for VR
