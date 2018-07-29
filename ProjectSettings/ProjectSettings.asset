@@ -859,9 +859,9 @@ PlayerSettings:
     UNet: 1
   facebookSdkVersion: 7.9.4
   apiCompatibilityLevel: 2
-  cloudProjectId: 3e9073a1-99e0-4c7e-a5d2-af3b9c0b0155
-  projectName: Multiplayer Tutorial
-  organizationId: nb2255
+  cloudProjectId: 43e4afe6-71f8-4521-9c12-e5ca675226da
+  projectName: CouchParty VR
+  organizationId: couchparty-vr
   cloudEnabled: 0
   enableNativePlatformBackendsForNewInputSystem: 0
   disableOldInputManagerSupport: 0
