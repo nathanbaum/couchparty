@@ -1,0 +1,38 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.Networking;
+
+public class GameDirector : NetworkBehaviour {
+    
+    public List<PseudoScene> scenes;
+    private int currentScene;
+    public List<PlayerStateController> Players { get; private set; }
+
+    void Start() {
+        if (!isServer)
+        {
+            return;
+        }
+        currentScene = 0;
+    }
+
+    void Next() {
+        if (!isServer)
+        {
+            return;
+        }
+        currentScene++;
+        scenes[currentScene].Run(Next);
+    }
+
+    public void AddPlayer( PlayerStateController player ) {
+        if (!isServer)
+        {
+            return;
+        }
+        Players.Add(player);
+        Debug.Log("Added player");
+        Debug.Log("There are now " + Players.Count + "players in the game.");
+    }
+}
