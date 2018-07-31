@@ -92,6 +92,7 @@ GameObject:
   - component: {fileID: 23680596441684424}
   - component: {fileID: 136905961079638322}
   - component: {fileID: 114339864487656318}
+  - component: {fileID: 114054534023595438}
   - component: {fileID: 114319082192752842}
   - component: {fileID: 114148188866446684}
   - component: {fileID: 114063701689135020}
@@ -346,6 +347,17 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &114054534023595438
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1824953612869384}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1ebbfc5cb4344f9daf45da04c9222a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114063701689135020
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -460,6 +472,7 @@ MonoBehaviour:
     type: 2}
   bulletSpawn: {fileID: 4535359850458962}
   fireClickLength: 0.3
+  myState: {fileID: 114054534023595438}
 --- !u!114 &114339864487656318
 MonoBehaviour:
   m_ObjectHideFlags: 1

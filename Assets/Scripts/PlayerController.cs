@@ -8,11 +8,14 @@ public class PlayerController : NetworkBehaviour
     public Transform bulletSpawn;
     public float fireClickLength = 1 / 10;
     private float buttonDownTime;
-    private PlayerStateController myState;
+    public PlayerStateController myState = null;
 
     private void Start()
     {
-        myState = new PlayerStateController();
+        if( myState == null)
+        {
+            myState = this.gameObject.GetComponent<PlayerStateController>();
+        }
     }
 
     void Update()
@@ -68,12 +71,15 @@ public class PlayerController : NetworkBehaviour
     [Command]
     void CmdAddPlayer() {
         GameDirector gd = GameObject.Find("GameDirector").GetComponent<GameDirector>();
+        Debug.Log("My state:");
+        Debug.Log(myState);
         gd.AddPlayer(myState);
     }
 
     public override void OnStartLocalPlayer()
     {
         GetComponent<Renderer>().material.color = Color.blue;
+        Debug.Log("LocalPlayer started");
         CmdAddPlayer();
     }
 }

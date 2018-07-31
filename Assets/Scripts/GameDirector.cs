@@ -14,6 +14,7 @@ public class GameDirector : NetworkBehaviour {
         {
             return;
         }
+        Players = new List<PlayerStateController>();
         currentScene = 0;
     }
 
