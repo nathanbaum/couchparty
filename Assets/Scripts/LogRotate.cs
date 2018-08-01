@@ -16,11 +16,12 @@ public class LogRotate : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!isLocalPlayer)
-        {
+        Debug.Log("HERE");
+        //if (!isLocalPlayer)
+        //{
 
-            return;
-        }
+        //    return;
+        //}
         //var qTo = new Vector3(0f, 0f, Random.Range(-88f, -92f));
         //log.transform.localEulerAngles = Vector3.Slerp(log.transform.localEulerAngles, qTo, speed * Time.deltaTime);
         log.transform.Rotate(-transform.up, 5f * speed * Time.deltaTime);
