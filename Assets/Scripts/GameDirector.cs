@@ -8,6 +8,7 @@ public class GameDirector : NetworkBehaviour {
     public List<PseudoScene> scenes;
     private int currentScene;
     public List<PlayerStateController> Players { get; private set; }
+    private bool gameStarted;
 
     void Start() {
         if (!isServer)
@@ -17,13 +18,14 @@ public class GameDirector : NetworkBehaviour {
         currentScene = 0;
     }
 
-    void Next() {
+    void Next( List<PlayerStateController> players ) {
         if (!isServer)
         {
             return;
         }
+        Players = players;
         currentScene++;
-        scenes[currentScene].Run(Next);
+        scenes[currentScene].Run(Players, Next);
     }
 
     public void AddPlayer( PlayerStateController player ) {
