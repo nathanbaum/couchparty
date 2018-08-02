@@ -33,7 +33,7 @@ public class LogRollScene : PseudoScene {
         rb.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
 
         if( Input.GetMouseButtonDown(0) ) {
-            rb.AddForce(new Vector3(0, 500, 0));
+            rb.AddForce(new Vector3(0, 700, 0));
         }
 
     }
