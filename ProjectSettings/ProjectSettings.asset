@@ -150,7 +150,7 @@ PlayerSettings:
   androidSupportedAspectRatio: 1
   androidMaxAspectRatio: 2.1
   applicationIdentifier:
-    Android: com.NathanielBaum.CardboardMulti
+    Android: com.NathanielBaum.Couchparty.test
     iOS: com.NathanielBaum.cardboardMulti
   buildNumber: {}
   AndroidBundleVersionCode: 1
