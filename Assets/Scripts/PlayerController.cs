@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.Networking;
 
-public delegate Transform MoveController(Transform T);
+public delegate void MoveController(PlayerController P);
 
 public class PlayerController : NetworkBehaviour
 {
@@ -11,7 +11,7 @@ public class PlayerController : NetworkBehaviour
     public float fireClickLength = 1 / 10;
     private float buttonDownTime;
     public PlayerStateController myState = null;
-    private MoveController CurrentMoveController;
+    public MoveController CurrentMoveController;
 
     private void Start()
     {
@@ -20,15 +20,14 @@ public class PlayerController : NetworkBehaviour
             myState = this.gameObject.GetComponent<PlayerStateController>();
         }
 
-        setMoveControls(DefaultController);
+        CurrentMoveController = DefaultController;
     }
 
-    private Transform DefaultController( Transform T ) {
+    private void DefaultController( PlayerController P ) {
+        
         var x = Input.GetMouseButton(0) ? Time.deltaTime * 3.0f : 0;
 
-        T.Translate(0, 0, x);
-
-        return T;
+        P.transform.Translate(0, 0, x);
     }
 
     void Update()
@@ -44,12 +43,21 @@ public class PlayerController : NetworkBehaviour
         transform.rotation = Camera.main.transform.rotation;
         camera.transform.Translate(new Vector3(0f, .6f, 0));
 
-        transform.position = CurrentMoveController(transform).position;
+        CurrentMoveController(this);
 
     }
 
-    public void setMoveControls( MoveController mc ) {
-        CurrentMoveController = mc;
+    [ClientRpc]
+    public void RpcSetMoveControls(string sceneName)
+    {
+        PseudoScene newScene = GameObject.Find("Scenes").GetComponent(sceneName) as PseudoScene;
+        CurrentMoveController = newScene.MoveController;
+    }
+
+    [ClientRpc]
+    public void RpcSnapTo(Vector3 pos)
+    {
+        transform.position = pos;
     }
 
     [Command]

@@ -25,24 +25,25 @@ public class LogRollScene : PseudoScene {
         SetUp();
     }
 
-    private Transform MoveController( Transform T ){
-        Rigidbody rb = T.gameObject.GetComponent<Rigidbody>();
+    public override void MoveController(PlayerController P)
+    {
+        Destroy(GameObject.Find("Floating Platform"));
+        Rigidbody rb = P.gameObject.GetComponent<Rigidbody>();
 
         rb.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
 
         if( Input.GetMouseButtonDown(0) ) {
-            rb.AddForce(new Vector3(0, 1, 0));
+            rb.AddForce(new Vector3(0, 500, 0));
         }
 
-        return T;
     }
 
     private void SetUp() {
         for (int i = 0; i < Players.Count; i++ ) {
-            Players[i].gameObject.GetComponent<PlayerController>().setMoveControls(MoveController);
-            Players[i].gameObject.transform.position = PlayerDropPoints[i].position;
+            Players[i].gameObject.GetComponent<PlayerController>().RpcSetMoveControls("LogRollScene");
+            Players[i].gameObject.GetComponent<PlayerController>().RpcSnapTo(PlayerDropPoints[i].position);
         }
-
+        
     }
 	
 	// Update is called once per frame

@@ -48,6 +48,7 @@ public class GameDirector : NetworkBehaviour {
         }
 
         if( !gameStarted && Players.Count == 2 ) {
+            gameStarted = true;
             Next(Players);
         }
     }
