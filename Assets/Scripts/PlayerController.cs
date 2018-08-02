@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using UnityEngine.Networking;
 
+public delegate Transform MoveController(Transform T);
+
 public class PlayerController : NetworkBehaviour
 {
 
@@ -9,6 +11,7 @@ public class PlayerController : NetworkBehaviour
     public float fireClickLength = 1 / 10;
     private float buttonDownTime;
     public PlayerStateController myState = null;
+    private MoveController CurrentMoveController;
 
     private void Start()
     {
@@ -16,6 +19,16 @@ public class PlayerController : NetworkBehaviour
         {
             myState = this.gameObject.GetComponent<PlayerStateController>();
         }
+
+        setMoveControls(DefaultController);
+    }
+
+    private Transform DefaultController( Transform T ) {
+        var x = Input.GetMouseButton(0) ? Time.deltaTime * 3.0f : 0;
+
+        T.Translate(0, 0, x);
+
+        return T;
     }
 
     void Update()
@@ -30,23 +43,13 @@ public class PlayerController : NetworkBehaviour
         camera.transform.position = transform.position;
         transform.rotation = Camera.main.transform.rotation;
         camera.transform.Translate(new Vector3(0f, .6f, 0));
-        
 
-        var x = Input.GetMouseButton(0) ? Time.deltaTime * 3.0f : 0;
+        transform.position = CurrentMoveController(transform).position;
 
-        transform.Translate(0, 0, x);
+    }
 
-        if (Input.GetMouseButtonDown(0))
-        {
-            buttonDownTime = Time.time;
-        }
-        if (Input.GetMouseButtonUp(0))
-        {
-            if (Time.time - buttonDownTime <= fireClickLength)
-            {
-                CmdFire();
-            }
-        }
+    public void setMoveControls( MoveController mc ) {
+        CurrentMoveController = mc;
     }
 
     [Command]

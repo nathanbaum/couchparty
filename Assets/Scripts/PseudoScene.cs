@@ -6,6 +6,6 @@ public delegate void NextPseudoScene(List<PlayerStateController> players );
 
 public abstract class PseudoScene : MonoBehaviour {
 
-    public abstract void Run(List<PlayerStateController> players, NextPseudoScene cb);
+    public abstract void Run(List<PlayerStateController> players, NextPseudoScene next);
 
 }

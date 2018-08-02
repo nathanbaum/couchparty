@@ -16,7 +16,9 @@ public class GameDirector : NetworkBehaviour {
             return;
         }
         Players = new List<PlayerStateController>();
-        currentScene = 0;
+        gameStarted = false;
+        currentScene = -1;
+
     }
 
     void Next( List<PlayerStateController> players ) {
@@ -37,5 +39,16 @@ public class GameDirector : NetworkBehaviour {
         Players.Add(player);
         Debug.Log("Added player");
         Debug.Log("There are now " + Players.Count + "players in the game.");
+    }
+
+    private void Update()
+    {
+        if(!isServer) {
+            return;
+        }
+
+        if( !gameStarted && Players.Count == 2 ) {
+            Next(Players);
+        }
     }
 }
