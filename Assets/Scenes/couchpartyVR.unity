@@ -15,7 +15,7 @@ RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 9
   m_Fog: 1
-  m_FogColor: {r: 0.46226418, g: 0.46226418, b: 0.39902994, a: 1}
+  m_FogColor: {r: 0.41451588, g: 0.50284475, b: 0.764151, a: 1}
   m_FogMode: 3
   m_FogDensity: 0.01
   m_LinearFogStart: 0
@@ -1547,7 +1547,7 @@ GameObject:
   - component: {fileID: 78421968}
   - component: {fileID: 78421967}
   m_Layer: 0
-  m_Name: Sphere
+  m_Name: Drop Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12590,7 +12590,7 @@ GameObject:
   - component: {fileID: 629761066}
   - component: {fileID: 629761065}
   m_Layer: 0
-  m_Name: Sphere
+  m_Name: Drop Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30320,7 +30320,7 @@ GameObject:
   - component: {fileID: 1501829981}
   - component: {fileID: 1501829980}
   m_Layer: 0
-  m_Name: Sphere
+  m_Name: Drop Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
