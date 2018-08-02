@@ -84,4 +84,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c2fb65ea65d84fd0ac361f192ff9b4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scenes: []
+  scenes:
+  - {fileID: 0}
