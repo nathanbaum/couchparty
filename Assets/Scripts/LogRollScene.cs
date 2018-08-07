@@ -13,11 +13,13 @@ public class LogRollScene : PseudoScene {
     public GameObject GameScene;
     public GameObject GameInstructions;
     public bool isJumping = false;
+    bool Active;
 
 
 	// Use this for initialization
 	void Start () {
         cloudsAreDescending = false;
+        Active = false;
 	}
 
 
@@ -57,6 +59,7 @@ public class LogRollScene : PseudoScene {
         StartCoroutine(CreateGame());
         Debug.Log("IsServer " + isServer);
         Debug.Log(GameScene);
+        Active = true;
     }
 
     [ClientRpc]
@@ -110,12 +113,17 @@ public class LogRollScene : PseudoScene {
 
     void TearDown() {
         GameScene.SetActive(false);
+        Active = false;
         Next(Players);
     }
 
     void Update () {
+        if( !isServer || !Active ){
+            return;
+        }
         if(PlayersAlive() == 0){
             Debug.Log("GameOver");
+            TearDown();
         }
 	}
 }
