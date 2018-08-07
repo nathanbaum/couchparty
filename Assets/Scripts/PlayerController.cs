@@ -25,9 +25,9 @@ public class PlayerController : NetworkBehaviour
 
     private void DefaultController( PlayerController P ) {
         
-        var x = Input.GetMouseButton(0) ? Time.deltaTime * 3.0f : 0;
+        var x = Input.GetMouseButton(0) ? Time.deltaTime * 2f : 0;
 
-        P.transform.Translate(0, 0, x);
+        P.transform.Translate(Camera.main.transform.forward.x*x, 0, Camera.main.transform.forward.z*x);
     }
 
     void Update()
@@ -38,10 +38,13 @@ public class PlayerController : NetworkBehaviour
         }
 
         GameObject camera = GameObject.Find("Camera Holder");
+        Transform head = transform.Find("Body Holder/HEAD");
 
         camera.transform.position = transform.position;
-        transform.rotation = Camera.main.transform.rotation;
-        camera.transform.Translate(new Vector3(0f, .6f, 0));
+        head.rotation = Camera.main.transform.rotation;
+        head.Rotate(new Vector3(-90, 180, 0));
+        camera.transform.Translate(new Vector3(0f, .6f, 0f));
+        camera.transform.Translate(Camera.main.transform.forward * .8f);
 
         CurrentMoveController(this);
 

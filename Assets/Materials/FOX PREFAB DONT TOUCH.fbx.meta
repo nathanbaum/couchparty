@@ -1,11 +1,11 @@
 fileFormatVersion: 2
-guid: e3e918510b9d4402e8407fd87f51a6ab
+guid: ceca60106294a4cbf823b75223790db4
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
-    100000: Camera
-    100002: Cube
-    100004: //RootNode
+    100000: //RootNode
+    100002: Camera
+    100004: Cube
     100006: Lamp
     100008: s0000.9869
     100010: s0001.1455
@@ -20,9 +20,9 @@ ModelImporter:
     100028: s0012.2594
     100030: s0012.3492
     100032: s0013.9487
-    400000: Camera
-    400002: Cube
-    400004: //RootNode
+    400000: //RootNode
+    400002: Camera
+    400004: Cube
     400006: Lamp
     400008: s0000.9869
     400010: s0001.1455
@@ -139,8 +139,8 @@ ModelImporter:
     previousCalculatedGlobalScale: 1
     hasPreviousCalculatedGlobalScale: 0
   tangentSpace:
-    normalSmoothAngle: 60
-    normalImportMode: 0
+    normalSmoothAngle: 0
+    normalImportMode: 1
     tangentImportMode: 3
     normalCalculationMode: 4
   importAnimation: 1
