@@ -13,6 +13,7 @@ public class PlayerController : NetworkBehaviour
     public PlayerStateController myState = null;
     public MoveController CurrentMoveController;
     public Material Ghost;
+    public bool isGrounded = false;
 
     private void Start()
     {
@@ -33,11 +34,18 @@ public class PlayerController : NetworkBehaviour
 
     public void OnCollisionEnter(Collision collision)
     {
-         if(collision.gameObject.name == "Log")        
-         {
-            GetComponent<Renderer>().material = Ghost;
-            transform.position = new Vector3(transform.position.x, transform.position.y + 3, transform.position.z);
-         }        
+        if (collision.gameObject.name == "Shroom")
+        {
+            isGrounded = true;
+        }
+    }
+
+    public void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.name == "Shroom")
+        {
+            isGrounded = false;
+        }
     }
 
     void Update()

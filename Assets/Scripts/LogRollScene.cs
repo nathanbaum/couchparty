@@ -12,6 +12,7 @@ public class LogRollScene : PseudoScene {
     public Transform CloudStopPoint;
     public GameObject GameScene;
     public GameObject GameInstructions;
+    public bool isJumping = false;
 
 
 	// Use this for initialization
@@ -37,11 +38,13 @@ public class LogRollScene : PseudoScene {
         rb.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
 
 
-        if( Input.GetMouseButtonDown(0) ) {
+        if( Input.GetMouseButtonDown(0) && P.isGrounded) {
             rb.AddForce(new Vector3(0, 700, 0));
         }
 
     }
+
+
 
     void SetUp() {
         for (int i = 0; i < Players.Count; i++ ) {
@@ -87,7 +90,7 @@ public class LogRollScene : PseudoScene {
 
     IEnumerator StartGame()
     {
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(3f);
         RpcStartGame();
         yield return null;
     }
