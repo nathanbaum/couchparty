@@ -43,34 +43,51 @@ public class LogRollScene : PseudoScene {
 
     }
 
-    [ClientRpc]
-    private void RpcSetUp() {
+    void SetUp() {
         for (int i = 0; i < Players.Count; i++ ) {
             Players[i].gameObject.GetComponent<PlayerController>().RpcSetMoveControls("LogRollScene");
             Players[i].gameObject.GetComponent<PlayerController>().RpcSnapTo(PlayerDropPoints[i].position);
         }
-        GameInstructions.SetActive(true);
-        StartCoroutine(RpcCreateGame());
-
-
-        
+        Debug.Log("Inside LogRollScene Setup");
+        RpcShowInstructions();
+        StartCoroutine(CreateGame());
+        Debug.Log("IsServer " + isServer);
+        Debug.Log(GameScene);
     }
 
     [ClientRpc]
-    IEnumerator RpcCreateGame()
+    public void RpcShowInstructions() {
+        Debug.Log("Inside LogRollScene RpcShowInstructions");
+        Debug.Log("IsClient " + isServer);
+        GameInstructions.SetActive(true);
+    }
+
+    [ClientRpc]
+    public void RpcCreateGame()
     {
-        yield return new WaitForSeconds(5f);
+        Debug.Log(GameScene);
+        Debug.Log(GameInstructions);
         Destroy(GameInstructions);
         GameScene.SetActive(true);
-        StartCoroutine(RpcStartGame());
+    }
+
+    IEnumerator CreateGame()
+    {
+        yield return new WaitForSeconds(5f);
+        RpcCreateGame();
+        StartCoroutine(StartGame());
         yield return null;
     }
 
     [ClientRpc]
-    IEnumerator RpcStartGame()
+    public void RpcStartGame() {
+        GameScene.GetComponent<LogRotate>().enabled = true;
+    }
+
+    IEnumerator StartGame()
     {
         yield return new WaitForSeconds(5f);
-        GameScene.GetComponent<LogRotate>().enabled = true;
+        RpcStartGame();
         yield return null;
     }
 
