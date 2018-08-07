@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class PlayerStateController : MonoBehaviour {
+public class PlayerStateController : NetworkBehaviour {
 
     public bool IsReady { get; private set; }
     public int Score { get; private set; }
@@ -23,9 +24,11 @@ public class PlayerStateController : MonoBehaviour {
         Score += n;
     }
 
-    public void TriggerDeath() {
+    [Command]
+    public void CmdTriggerDeath() {
         IsDead = true;
         Debug.Log("TriggerDeath called");
+        Score = GameObject.Find("Scenes").GetComponent<LogRollScene>().PlayersAlive();
     }
 
 }

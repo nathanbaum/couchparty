@@ -96,23 +96,26 @@ public class LogRollScene : PseudoScene {
     }
 
 	// Update is called once per frame
-    /*private bool PlayersAlive(){
+    public int PlayersAlive(){
+        int num = 0;
         for (int i = 0; i < Players.Count; i++)
         {
-            if (Players[i].IsDead == false)
+            if (!Players[i].IsDead)
             {
-                return true;
+                num++;
             }
         }
-        return false;
-    }*/
+        return num;
+    }
+
+    void TearDown() {
+        GameScene.SetActive(false);
+        Next(Players);
+    }
 
     void Update () {
-        //if(PlayersAlive()){
-        //    Debug.Log("Alive");
-        //}
-        //else{
-        //    Debug.Log("GameOver");
-        //}
+        if(PlayersAlive() == 0){
+            Debug.Log("GameOver");
+        }
 	}
 }

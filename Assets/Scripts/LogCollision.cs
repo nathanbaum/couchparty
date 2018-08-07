@@ -7,10 +7,11 @@ public class LogCollision : MonoBehaviour
     public Material deathColor;
 
     // Use this for initialization
-    public void OnCollisionEnter(Collision collision)
+    public void OnTriggerEnter(Collider other)
     {
-        Debug.Log("COLLISION: " + collision.rigidbody.gameObject);
-        var player = collision.rigidbody.gameObject;
+        Debug.Log("COLLISION: " + other.gameObject);
+        GameObject player = other.gameObject;
+        player.GetComponent<PlayerStateController>().CmdTriggerDeath();
         player.GetComponent<Renderer>().material = deathColor;
     }
 
