@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
 public class LogRollScene : PseudoScene {
 
@@ -35,33 +36,38 @@ public class LogRollScene : PseudoScene {
 
         rb.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
 
+
         if( Input.GetMouseButtonDown(0) ) {
             rb.AddForce(new Vector3(0, 700, 0));
         }
 
     }
 
+    [ClientRpc]
     private void SetUp() {
         for (int i = 0; i < Players.Count; i++ ) {
             Players[i].gameObject.GetComponent<PlayerController>().RpcSetMoveControls("LogRollScene");
             Players[i].gameObject.GetComponent<PlayerController>().RpcSnapTo(PlayerDropPoints[i].position);
         }
         GameInstructions.SetActive(true);
-        StartCoroutine(CreateGame());
+        StartCoroutine(RpcCreateGame());
 
 
         
     }
-    IEnumerator CreateGame()
+
+    [ClientRpc]
+    IEnumerator RpcCreateGame()
     {
         yield return new WaitForSeconds(5f);
         Destroy(GameInstructions);
         GameScene.SetActive(true);
-        StartCoroutine(StartGame());
+        StartCoroutine(RpcStartGame());
         yield return null;
     }
 
-    IEnumerator StartGame()
+    [ClientRpc]
+    IEnumerator RpcStartGame()
     {
         yield return new WaitForSeconds(5f);
         GameScene.GetComponent<LogRotate>().enabled = true;
