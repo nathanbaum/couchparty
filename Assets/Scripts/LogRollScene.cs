@@ -9,6 +9,9 @@ public class LogRollScene : PseudoScene {
     public List<Transform> PlayerDropPoints;
     private bool cloudsAreDescending;
     public Transform CloudStopPoint;
+    public GameObject GameScene;
+    public GameObject GameInstructions;
+
 
 	// Use this for initialization
 	void Start () {
@@ -43,11 +46,46 @@ public class LogRollScene : PseudoScene {
             Players[i].gameObject.GetComponent<PlayerController>().RpcSetMoveControls("LogRollScene");
             Players[i].gameObject.GetComponent<PlayerController>().RpcSnapTo(PlayerDropPoints[i].position);
         }
+        GameInstructions.SetActive(true);
+        StartCoroutine(CreateGame());
+
+
         
     }
-	
+    IEnumerator CreateGame()
+    {
+        yield return new WaitForSeconds(5f);
+        Destroy(GameInstructions);
+        GameScene.SetActive(true);
+        StartCoroutine(StartGame());
+        yield return null;
+    }
+
+    IEnumerator StartGame()
+    {
+        yield return new WaitForSeconds(5f);
+        GameScene.GetComponent<LogRotate>().enabled = true;
+        yield return null;
+    }
+
 	// Update is called once per frame
-	void Update () {
-		
+    private bool PlayersAlive(){
+        for (int i = 0; i < Players.Count; i++)
+        {
+            if (Players[i].IsDead == false)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    void Update () {
+        if(PlayersAlive()){
+            Debug.Log("Alive");
+        }
+        else{
+            Debug.Log("GameOver");
+        }
 	}
 }

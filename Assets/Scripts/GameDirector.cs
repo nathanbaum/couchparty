@@ -47,7 +47,7 @@ public class GameDirector : NetworkBehaviour {
             return;
         }
 
-        if( !gameStarted && Players.Count == 2 ) {
+        if( !gameStarted && Players.Count == 1 ) {
             gameStarted = true;
             Next(Players);
         }
