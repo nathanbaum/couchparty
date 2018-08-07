@@ -12,6 +12,7 @@ public class PlayerController : NetworkBehaviour
     private float buttonDownTime;
     public PlayerStateController myState = null;
     public MoveController CurrentMoveController;
+    public Material Ghost;
 
     private void Start()
     {
@@ -28,6 +29,15 @@ public class PlayerController : NetworkBehaviour
         var x = Input.GetMouseButton(0) ? Time.deltaTime * 2f : 0;
 
         P.transform.Translate(Camera.main.transform.forward.x*x, 0, Camera.main.transform.forward.z*x);
+    }
+
+    public void OnCollisionEnter(Collision collision)
+    {
+         if(collision.gameObject.name == "Log")        
+         {
+            GetComponent<Renderer>().material = Ghost;
+            transform.position = new Vector3(transform.position.x, transform.position.y + 3, transform.position.z);
+         }        
     }
 
     void Update()

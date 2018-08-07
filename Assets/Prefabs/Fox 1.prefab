@@ -1202,6 +1202,7 @@ MonoBehaviour:
   bulletSpawn: {fileID: 0}
   fireClickLength: 0
   myState: {fileID: 114500309631184268}
+  Ghost: {fileID: 2100000, guid: f40de84e38f25424b9f7a8dd8ce603a8, type: 2}
 --- !u!136 &136611419911675540
 CapsuleCollider:
   m_ObjectHideFlags: 1

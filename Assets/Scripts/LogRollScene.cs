@@ -48,6 +48,7 @@ public class LogRollScene : PseudoScene {
             Players[i].gameObject.GetComponent<PlayerController>().RpcSetMoveControls("LogRollScene");
             Players[i].gameObject.GetComponent<PlayerController>().RpcSnapTo(PlayerDropPoints[i].position);
         }
+
         Debug.Log("Inside LogRollScene Setup");
         RpcShowInstructions();
         StartCoroutine(CreateGame());
