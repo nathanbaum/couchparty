@@ -44,7 +44,7 @@ public class LogRollScene : PseudoScene {
     }
 
     [ClientRpc]
-    private void SetUp() {
+    private void RpcSetUp() {
         for (int i = 0; i < Players.Count; i++ ) {
             Players[i].gameObject.GetComponent<PlayerController>().RpcSetMoveControls("LogRollScene");
             Players[i].gameObject.GetComponent<PlayerController>().RpcSnapTo(PlayerDropPoints[i].position);
