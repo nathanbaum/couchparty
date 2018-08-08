@@ -86,6 +86,7 @@ public class LogRollScene : PseudoScene {
         Destroy(GameInstructions);
         for (int i = 0; i < Timer.Count; i++)
         {
+            Debug.Log("Countdown: " + i);
             Timer[i].SetActive(true);
             StartCoroutine(CountDown(Timer[i]));
         }
