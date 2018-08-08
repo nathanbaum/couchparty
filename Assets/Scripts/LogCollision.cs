@@ -13,6 +13,7 @@ public class LogCollision : MonoBehaviour
         GameObject player = other.gameObject;
         player.GetComponent<PlayerStateController>().CmdTriggerDeath();
         player.GetComponent<Renderer>().material = deathColor;
+
     }
 
     // Update is called once per frame

@@ -12,6 +12,9 @@ public class LogRollScene : PseudoScene {
     public Transform CloudStopPoint;
     public GameObject GameScene;
     public GameObject GameInstructions;
+    public List<GameObject> Timer;
+ 
+
     public bool isJumping = false;
     bool Active;
 
@@ -56,11 +59,18 @@ public class LogRollScene : PseudoScene {
 
         Debug.Log("Inside LogRollScene Setup");
         RpcShowInstructions();
-        StartCoroutine(CreateGame());
+        StartCoroutine(InstructionTime());
         Debug.Log("IsServer " + isServer);
         Debug.Log(GameScene);
         Active = true;
     }
+    IEnumerator InstructionTime()
+    {
+        yield return new WaitForSeconds(5f);
+        RpcCountdownStart();
+        yield return null;
+    }
+
 
     [ClientRpc]
     public void RpcShowInstructions() {
@@ -70,11 +80,37 @@ public class LogRollScene : PseudoScene {
     }
 
     [ClientRpc]
+    public void RpcCountdownStart()
+    {
+        Debug.Log("Starting countdown");
+        Destroy(GameInstructions);
+        for (int i = 0; i < Timer.Count; i++)
+        {
+            Timer[i].SetActive(true);
+            StartCoroutine(CountDown(Timer[i]));
+        }
+        StartCoroutine(CreateGame());
+    }
+
+
+    [ClientRpc]
+    public void RpcCountdown(GameObject num)
+    {
+        num.SetActive(false);
+    }
+
+    IEnumerator CountDown(GameObject num)
+    {
+        yield return new WaitForSeconds(1f);
+        RpcCountdown(num);
+        yield return null;
+    }
+
+    [ClientRpc]
     public void RpcCreateGame()
     {
         Debug.Log(GameScene);
         Debug.Log(GameInstructions);
-        Destroy(GameInstructions);
         GameScene.SetActive(true);
     }
 
