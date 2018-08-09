@@ -12,7 +12,7 @@ public class LogRollScene : PseudoScene {
     public Transform CloudStopPoint;
     public GameObject GameScene;
     public GameObject GameInstructions;
-    public List<GameObject> Timer;
+
  
 
     public bool isJumping = false;
@@ -59,17 +59,60 @@ public class LogRollScene : PseudoScene {
 
         Debug.Log("Inside LogRollScene Setup");
         RpcShowInstructions();
+        GameInstructions.SetActive(false);
         StartCoroutine(InstructionTime());
+
         Debug.Log("IsServer " + isServer);
         Debug.Log(GameScene);
         Active = true;
     }
+
+    [ClientRpc]
+    public void RpcActivate(string name)
+    {
+        Debug.Log(name);
+        GameObject obj = GameObject.Find(name);
+        Debug.Log("OBJ: " + obj.name);
+        obj.SetActive(true);
+    }
+
+    [ClientRpc]
+    public void RpcDeactivate(string name)
+    {
+        GameObject obj = GameObject.Find(name);
+  
+        obj.SetActive(false);
+    }
+
+
     IEnumerator InstructionTime()
     {
-        yield return new WaitForSeconds(2f);
-        RpcCountdownStart();
+        yield return new WaitForSeconds(1f);
+        RpcActivate("Instructions/Timer/three");
+        yield return new WaitForSeconds(1f);
+        RpcDeactivate("Instructions/Timer/three");
+        RpcActivate("Instructions/Timer/two");
+        yield return new WaitForSeconds(1f);
+        RpcDeactivate("Instructions/Timer/two");
+        RpcActivate("Instructions/Timer/one");
+        yield return new WaitForSeconds(1f);
+        RpcDeactivate("Instructions/Timer/one");
+        StartCoroutine(CreateGame());
         yield return null;
     }
+
+
+
+
+
+
+
+    //IEnumerator InstructionTime()
+    //{
+    //    yield return new WaitForSeconds(2f);
+    //    RpcCountdownStart();
+    //    yield return null;
+    //}
 
 
     [ClientRpc]
@@ -79,33 +122,21 @@ public class LogRollScene : PseudoScene {
         GameInstructions.SetActive(true);
     }
 
-    [ClientRpc]
-    public void RpcCountdownStart()
-    {
-        Debug.Log("Starting countdown");
-        Destroy(GameInstructions);
-        for (int i = 0; i < Timer.Count; i++)
-        {
-            Debug.Log("Countdown: " + i);
-            Timer[i].SetActive(true);
-            StartCoroutine(CountDown(Timer[i]));
-        }
-        StartCoroutine(CreateGame());
-    }
+    //[ClientRpc]
+    //public void RpcCountdownStart()
+    //{
+    //    Debug.Log("Starting countdown");
+    //    Destroy(GameInstructions);
+    //    for (int i = 0; i < Timer.Count; i++)
+    //    {
+    //        Debug.Log("Countdown: " + i);
+    //        Timer[i].SetActive(true);
+    //        StartCoroutine(CountDown(Timer[i]));
+    //    }
+    //    StartCoroutine(CreateGame());
+    //}
 
 
-    [ClientRpc]
-    public void RpcCountdown(GameObject num)
-    {
-        num.SetActive(false);
-    }
-
-    IEnumerator CountDown(GameObject num)
-    {
-        yield return new WaitForSeconds(1f);
-        RpcCountdown(num);
-        yield return null;
-    }
 
     [ClientRpc]
     public void RpcCreateGame()

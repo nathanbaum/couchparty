@@ -23,7 +23,6 @@ public class LogRotate : NetworkBehaviour
         {
             curSpeed = curSpeed + accelTime * Time.deltaTime;
         }
-        Debug.Log("Speed: " + curSpeed);
         log.transform.Rotate(-transform.up, 5f * curSpeed * Time.deltaTime);
         transform.Rotate(Vector3.up * curSpeed * Time.deltaTime);
     }

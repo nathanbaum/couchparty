@@ -491,6 +491,21 @@ Prefab:
       propertyPath: scenes.Array.data[2]
       value: 
       objectReference: {fileID: 1559431553}
+    - target: {fileID: 114980271364344702, guid: 978ed8a85596e4e8580269d179fd010c,
+        type: 2}
+      propertyPath: mat1
+      value: 
+      objectReference: {fileID: 2100000, guid: 6975e462bdde140bb8b1a5e73cad1343, type: 2}
+    - target: {fileID: 114980271364344702, guid: 978ed8a85596e4e8580269d179fd010c,
+        type: 2}
+      propertyPath: mat2
+      value: 
+      objectReference: {fileID: 2100000, guid: cb1921099b98c4939977b97f7b2c399f, type: 2}
+    - target: {fileID: 114980271364344702, guid: 978ed8a85596e4e8580269d179fd010c,
+        type: 2}
+      propertyPath: mat3
+      value: 
+      objectReference: {fileID: 2100000, guid: 2599bfd50ce774e90a6b6dbec2eb5842, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 978ed8a85596e4e8580269d179fd010c, type: 2}
   m_IsPrefabAsset: 0
@@ -4527,6 +4542,21 @@ Prefab:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114670092464492812, guid: 6a47c5d28b5b844f9935c95692474723,
+        type: 2}
+      propertyPath: three
+      value: 
+      objectReference: {fileID: 917637249}
+    - target: {fileID: 114670092464492812, guid: 6a47c5d28b5b844f9935c95692474723,
+        type: 2}
+      propertyPath: two
+      value: 
+      objectReference: {fileID: 1392424254}
+    - target: {fileID: 114670092464492812, guid: 6a47c5d28b5b844f9935c95692474723,
+        type: 2}
+      propertyPath: one
+      value: 
+      objectReference: {fileID: 1606364293}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6a47c5d28b5b844f9935c95692474723, type: 2}
   m_IsPrefabAsset: 0
@@ -4858,7 +4888,7 @@ GameObject:
   - component: {fileID: 917637250}
   - component: {fileID: 917637251}
   m_Layer: 0
-  m_Name: 3
+  m_Name: three
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16450,7 +16480,7 @@ GameObject:
   - component: {fileID: 1392424255}
   - component: {fileID: 1392424256}
   m_Layer: 0
-  m_Name: 2
+  m_Name: two
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -21671,7 +21701,7 @@ GameObject:
   - component: {fileID: 1606364295}
   - component: {fileID: 1606364294}
   m_Layer: 0
-  m_Name: 1
+  m_Name: one
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
