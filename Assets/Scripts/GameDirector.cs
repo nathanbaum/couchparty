@@ -4,7 +4,9 @@ using UnityEngine;
 using UnityEngine.Networking;
 
 public class GameDirector : NetworkBehaviour {
-    
+    public Material mat1;
+    public Material mat2;
+    public Material mat3;
     public List<PseudoScene> scenes;
     private int currentScene;
     public List<PlayerStateController> Players { get; private set; }
@@ -40,6 +42,21 @@ public class GameDirector : NetworkBehaviour {
         Players.Add(player);
         Debug.Log("Added player");
         Debug.Log("There are now " + Players.Count + "players in the game.");
+        switch (Players.Count)
+        {
+            case 1:
+                player.GetComponent<ChangeMaterial>().UpdateMat(mat1);
+                player.GetComponent<PlayerController>().StartingColor = mat1;
+                break;
+            case 2:
+                player.GetComponent<ChangeMaterial>().UpdateMat(mat2);
+                player.GetComponent<PlayerController>().StartingColor = mat2;
+                break;
+            case 3:
+                player.GetComponent<ChangeMaterial>().UpdateMat(mat3);
+                player.GetComponent<PlayerController>().StartingColor = mat3;
+                break;
+        }
     }
 
     private void Update()

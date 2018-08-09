@@ -14,6 +14,7 @@ public class PlayerController : NetworkBehaviour
     public MoveController CurrentMoveController;
     public Material Ghost;
     public bool isGrounded = false;
+    public Material StartingColor;
 
     private void Start()
     {

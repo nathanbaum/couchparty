@@ -74,6 +74,7 @@ public class BalloonPopScene : PseudoScene
         for (int i = 0; i < Players.Count; i++)
         {
             Players[i].gameObject.GetComponent<PlayerController>().RpcSetMoveControls("BalloonPopScene");
+            Players[i].GetComponent<ChangeMaterial>().UpdateMat(Players[i].GetComponent<PlayerController>().StartingColor);
         }
 
         Debug.Log("Inside BalloonPopScene Setup");

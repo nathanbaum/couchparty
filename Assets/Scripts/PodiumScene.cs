@@ -16,6 +16,8 @@ public class PodiumScene : PseudoScene
     void Start()
     {
         Active = false;
+
+
     }
 
 
@@ -52,14 +54,21 @@ public class PodiumScene : PseudoScene
         {
             Players[i].gameObject.GetComponent<PlayerController>().RpcSetMoveControls("PodiumScene");
             Players[i].gameObject.GetComponent<PlayerController>().RpcSnapTo(PlayerDropPoints[i].position);
+            Players[i].GetComponent<ChangeMaterial>().UpdateMat(Players[i].GetComponent<PlayerController>().StartingColor);
         }
-
+        RpcStartParticles();
 
         //RpcShowInstructions();
         //StartCoroutine(CreateGame());
         //Debug.Log("IsServer " + isServer);
         //Debug.Log(GameScene);
         Active = true;
+    }
+
+    [ClientRpc]
+    public void RpcStartParticles(){
+        GameObject parts = GameObject.Find("PodiumParticles");
+        parts.SetActive(true);
     }
 
     //[ClientRpc]
