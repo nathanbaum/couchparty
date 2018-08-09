@@ -157,7 +157,7 @@ public class BalloonPopScene : PseudoScene
         {
             return;
         }
-        if (BalloonsPopped == 5)
+        if (BalloonsPopped == 8)
         {
             Debug.Log("GameOver");
             TearDown();
