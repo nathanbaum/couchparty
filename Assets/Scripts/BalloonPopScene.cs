@@ -11,6 +11,7 @@ public class BalloonPopScene : PseudoScene
     public GameObject CarrotPrefab;
     public GameObject BalloonPrefab;
     private int BalloonsPopped;
+    public Transform BalloonSpawnCenter;
     bool Active;
 
 
@@ -65,6 +66,27 @@ public class BalloonPopScene : PseudoScene
     }
 
     [Command]
+    public void CmdSpawnBalloon() {
+        if( !Active ) {
+            return;
+        }
+        GameObject balloon = Instantiate(
+            BalloonPrefab,
+            BalloonSpawnCenter.position,
+            BalloonSpawnCenter.rotation
+        );
+
+        Vector3 delta = Quaternion.Euler(0, Random.value*360, 0) * new Vector3(Random.value * 4, 0, 0);
+        balloon.transform.Translate(delta);
+
+        balloon.GetComponent<Rigidbody>().velocity = balloon.transform.up * 4;
+
+        NetworkServer.Spawn(balloon);
+
+        Destroy(balloon, 7.0f);
+    }
+
+    [Command]
     public void CmdAddBalloonPopped() {
         BalloonsPopped++;
     }
@@ -79,6 +101,7 @@ public class BalloonPopScene : PseudoScene
         Debug.Log("Inside BalloonPopScene Setup");
         Debug.Log("IsServer " + isServer);
         Active = true;
+        InvokeRepeating("CmdSpawnBalloon", 0f, 3f);
     }
 
     void TearDown()

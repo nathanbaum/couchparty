@@ -21,9 +21,9 @@ GameObject:
   - component: {fileID: 4846558993106406}
   - component: {fileID: 114121440503377588}
   - component: {fileID: 114877824801169998}
-  - component: {fileID: 64966831114300724}
   - component: {fileID: 114790286525285520}
   - component: {fileID: 54547045647618986}
+  - component: {fileID: 136511152266184074}
   m_Layer: 0
   m_Name: Carrot
   m_TagString: Untagged
@@ -234,20 +234,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!64 &64966831114300724
-MeshCollider:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1136153514799392}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 1
-  m_CookingOptions: 14
-  m_SkinWidth: 0.01
-  m_Mesh: {fileID: 0}
 --- !u!114 &114121440503377588
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -313,3 +299,16 @@ MonoBehaviour:
   m_SnapThreshold: 5
   m_InterpolateRotation: 1
   m_InterpolateMovement: 1
+--- !u!136 &136511152266184074
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1136153514799392}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 15
+  m_Height: 120
+  m_Direction: 2
+  m_Center: {x: 0, y: 0, z: -20}
