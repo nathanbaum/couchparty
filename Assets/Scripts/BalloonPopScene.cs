@@ -14,6 +14,7 @@ public class BalloonPopScene : PseudoScene
     public Transform BalloonSpawnCenter;
     bool Active;
     public float speed = 15f;
+    public GameObject GameInstructions;
 
 
     // Use this for initialization
@@ -102,8 +103,47 @@ public class BalloonPopScene : PseudoScene
         Debug.Log("Inside BalloonPopScene Setup");
         Debug.Log("IsServer " + isServer);
         Active = true;
-        InvokeRepeating("CmdSpawnBalloon", 0f, 3f);
+        StartCoroutine(InstructionTime());
+        InvokeRepeating("CmdSpawnBalloon", 10f, 3f);
     }
+
+
+
+    [ClientRpc]
+    public void RpcActivate(string name)
+    {
+        Debug.Log(name);
+        GameObject obj = GameObject.Find(name);
+        obj.SetActive(true);
+    }
+
+    [ClientRpc]
+    public void RpcDeactivate(string name)
+    {
+        GameObject obj = GameObject.Find(name);
+
+        obj.SetActive(false);
+    }
+
+
+    IEnumerator InstructionTime()
+    {
+        RpcActivate("Instructions/Timer/BalloonPop");
+        yield return new WaitForSeconds(5f);
+        RpcDeactivate("Instructions/Timer/BalloonPop");
+        yield return new WaitForSeconds(.5f);
+        RpcActivate("Instructions/Timer/three");
+        yield return new WaitForSeconds(1f);
+        RpcDeactivate("Instructions/Timer/three");
+        RpcActivate("Instructions/Timer/two");
+        yield return new WaitForSeconds(1f);
+        RpcDeactivate("Instructions/Timer/two");
+        RpcActivate("Instructions/Timer/one");
+        yield return new WaitForSeconds(1f);
+        RpcDeactivate("Instructions/Timer/one");
+        yield return null;
+    }
+
 
     void TearDown()
     {

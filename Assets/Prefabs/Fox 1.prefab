@@ -159,7 +159,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1687836057310910
 GameObject:
   m_ObjectHideFlags: 1
@@ -193,7 +193,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1837553134559654
 GameObject:
   m_ObjectHideFlags: 1
@@ -437,7 +437,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1966434182134466}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 23.033258, y: -27.277142, z: 3.830758}
+  m_LocalPosition: {x: 9.035223, y: -19.39, z: -7.210432}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4119179245143782}
@@ -1217,6 +1217,7 @@ MonoBehaviour:
   myState: {fileID: 114500309631184268}
   Ghost: {fileID: 2100000, guid: f40de84e38f25424b9f7a8dd8ce603a8, type: 2}
   isGrounded: 0
+  StartingColor: {fileID: 0}
 --- !u!136 &136611419911675540
 CapsuleCollider:
   m_ObjectHideFlags: 1

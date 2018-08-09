@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Balloon
   - Changeable
+  - BalloonInstr
   layers:
   - Default
   - TransparentFX

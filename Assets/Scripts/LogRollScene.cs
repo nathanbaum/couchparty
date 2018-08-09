@@ -58,8 +58,6 @@ public class LogRollScene : PseudoScene {
         }
 
         Debug.Log("Inside LogRollScene Setup");
-        RpcShowInstructions();
-        GameInstructions.SetActive(false);
         StartCoroutine(InstructionTime());
 
         Debug.Log("IsServer " + isServer);
@@ -87,7 +85,10 @@ public class LogRollScene : PseudoScene {
 
     IEnumerator InstructionTime()
     {
-        yield return new WaitForSeconds(1f);
+        RpcActivate("Instructions/Timer/LogRoll");
+        yield return new WaitForSeconds(5f);
+        RpcDeactivate("Instructions/Timer/LogRoll");
+        yield return new WaitForSeconds(.5f);
         RpcActivate("Instructions/Timer/three");
         yield return new WaitForSeconds(1f);
         RpcDeactivate("Instructions/Timer/three");
@@ -97,44 +98,10 @@ public class LogRollScene : PseudoScene {
         RpcActivate("Instructions/Timer/one");
         yield return new WaitForSeconds(1f);
         RpcDeactivate("Instructions/Timer/one");
+        yield return new WaitForSeconds(1f);
         StartCoroutine(CreateGame());
         yield return null;
     }
-
-
-
-
-
-
-
-    //IEnumerator InstructionTime()
-    //{
-    //    yield return new WaitForSeconds(2f);
-    //    RpcCountdownStart();
-    //    yield return null;
-    //}
-
-
-    [ClientRpc]
-    public void RpcShowInstructions() {
-        Debug.Log("Inside LogRollScene RpcShowInstructions");
-        Debug.Log("IsClient " + isServer);
-        GameInstructions.SetActive(true);
-    }
-
-    //[ClientRpc]
-    //public void RpcCountdownStart()
-    //{
-    //    Debug.Log("Starting countdown");
-    //    Destroy(GameInstructions);
-    //    for (int i = 0; i < Timer.Count; i++)
-    //    {
-    //        Debug.Log("Countdown: " + i);
-    //        Timer[i].SetActive(true);
-    //        StartCoroutine(CountDown(Timer[i]));
-    //    }
-    //    StartCoroutine(CreateGame());
-    //}
 
 
 
@@ -148,7 +115,6 @@ public class LogRollScene : PseudoScene {
 
     IEnumerator CreateGame()
     {
-        yield return new WaitForSeconds(5f);
         RpcCreateGame();
         StartCoroutine(StartGame());
         yield return null;
@@ -161,7 +127,7 @@ public class LogRollScene : PseudoScene {
 
     IEnumerator StartGame()
     {
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(1f);
         RpcStartGame();
         yield return null;
     }
@@ -179,9 +145,14 @@ public class LogRollScene : PseudoScene {
     }
 
     void TearDown() {
+        for (int i = 0; i < Players.Count; i++)
+        {
+            Players[i].GetComponent<ChangeMaterial>().UpdateMat(Players[i].GetComponent<PlayerController>().StartingColor);
+        }
         GameScene.SetActive(false);
         Active = false;
         Next(Players);
+
     }
 
     void Update () {

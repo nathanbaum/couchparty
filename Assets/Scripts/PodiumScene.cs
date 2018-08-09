@@ -54,7 +54,6 @@ public class PodiumScene : PseudoScene
         {
             Players[i].gameObject.GetComponent<PlayerController>().RpcSetMoveControls("PodiumScene");
             Players[i].gameObject.GetComponent<PlayerController>().RpcSnapTo(PlayerDropPoints[i].position);
-            Players[i].GetComponent<ChangeMaterial>().UpdateMat(Players[i].GetComponent<PlayerController>().StartingColor);
         }
         RpcStartParticles();
 
