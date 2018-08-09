@@ -11,6 +11,7 @@ public class GameDirector : NetworkBehaviour {
     private int currentScene;
     public List<PlayerStateController> Players { get; private set; }
     private bool gameStarted;
+    private int playercounter;
 
     void Start() {
         if (!isServer)
@@ -20,7 +21,7 @@ public class GameDirector : NetworkBehaviour {
         Players = new List<PlayerStateController>();
         gameStarted = false;
         currentScene = -1;
-
+        playercounter = 0;
     }
 
     void Next( List<PlayerStateController> players ) {
@@ -42,6 +43,8 @@ public class GameDirector : NetworkBehaviour {
         Players.Add(player);
         Debug.Log("Added player");
         Debug.Log("There are now " + Players.Count + "players in the game.");
+        player.gameObject.name = "player" + Players.Count.ToString();
+        player.RpcUpdateName(player.gameObject.name);
         switch (Players.Count)
         {
             case 1:
@@ -65,7 +68,7 @@ public class GameDirector : NetworkBehaviour {
             return;
         }
 
-        if( !gameStarted && Players.Count == 3 ) {
+        if( !gameStarted && Players.Count == 2 ) {
             gameStarted = true;
             Next(Players);
         }

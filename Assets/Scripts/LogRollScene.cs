@@ -144,15 +144,20 @@ public class LogRollScene : PseudoScene {
         return num;
     }
 
+    [ClientRpc]
+    public void RpcRemoveLog() {
+        Destroy(GameObject.Find("Scenes/LogSystem"));
+    }
+
     void TearDown() {
         for (int i = 0; i < Players.Count; i++)
         {
             Players[i].GetComponent<ChangeMaterial>().UpdateMat(Players[i].GetComponent<PlayerController>().StartingColor);
         }
-        GameScene.SetActive(false);
         Active = false;
+        RpcRemoveLog();
+        Destroy(GameScene);
         Next(Players);
-
     }
 
     void Update () {

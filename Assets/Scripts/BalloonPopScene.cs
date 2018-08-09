@@ -8,12 +8,10 @@ public class BalloonPopScene : PseudoScene
 
     private NextPseudoScene Next;
     private List<PlayerStateController> Players;
-    public GameObject CarrotPrefab;
     public GameObject BalloonPrefab;
     private int BalloonsPopped;
     public Transform BalloonSpawnCenter;
     bool Active;
-    public float speed = 15f;
     public GameObject GameInstructions;
 
 
@@ -45,26 +43,10 @@ public class BalloonPopScene : PseudoScene
 
         if (Input.GetMouseButtonDown(0) && P.isGrounded)
         {
-            CmdFire(head.position, head.up, head.rotation, P.name);
+            Debug.Log("trying to fire a carrot!");
+            P.CmdFire(head.position, head.up, head.rotation, P.gameObject.name);
         }
 
-    }
-
-    [Command]
-    public void CmdFire(Vector3 pos, Vector3 fore, Quaternion rot, string owner ) {
-        GameObject carrot = Instantiate(
-            CarrotPrefab,
-            pos + fore,
-            rot
-        );
-
-        carrot.transform.Rotate(new Vector3(-90, 0, 0));
-        carrot.GetComponent<Rigidbody>().velocity = carrot.transform.forward * speed;
-        carrot.GetComponent<Carrot>().Owner = GameObject.Find(owner);
-
-        NetworkServer.Spawn(carrot);
-
-        Destroy(carrot, 3.0f);
     }
 
     [Command]

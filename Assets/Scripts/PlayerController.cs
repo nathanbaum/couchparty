@@ -15,6 +15,10 @@ public class PlayerController : NetworkBehaviour
     public Material Ghost;
     public bool isGrounded = false;
     public Material StartingColor;
+    public GameObject CarrotPrefab;
+    public float speed = 15f;
+    [SyncVar]
+    public string MyName;
 
     private void Start()
     {
@@ -22,7 +26,6 @@ public class PlayerController : NetworkBehaviour
         {
             myState = this.gameObject.GetComponent<PlayerStateController>();
         }
-
         CurrentMoveController = DefaultController;
     }
 
@@ -47,6 +50,24 @@ public class PlayerController : NetworkBehaviour
         {
             isGrounded = false;
         }
+    }
+
+    [Command]
+    public void CmdFire(Vector3 pos, Vector3 fore, Quaternion rot, string owner)
+    {
+        GameObject carrot = Instantiate(
+            CarrotPrefab,
+            pos + fore,
+            rot
+        );
+
+        carrot.transform.Rotate(new Vector3(-90, 0, 0));
+        carrot.GetComponent<Rigidbody>().velocity = carrot.transform.forward * speed;
+        carrot.GetComponent<Carrot>().Owner = GameObject.Find(owner);
+
+        NetworkServer.Spawn(carrot);
+
+        Destroy(carrot, 3.0f);
     }
 
     void Update()
@@ -83,25 +104,6 @@ public class PlayerController : NetworkBehaviour
     }
 
     [Command]
-    void CmdFire()
-    {
-        // Create the Bullet from the Bullet Prefab
-        var bullet = (GameObject)Instantiate(
-            bulletPrefab,
-            bulletSpawn.position,
-            bulletSpawn.rotation);
-
-        // Add velocity to the bullet
-        bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * 6;
-
-        // Spawn the bullet on the Clients
-        NetworkServer.Spawn(bullet);
-
-        // Destroy the bullet after 2 seconds
-        Destroy(bullet, 2.0f);
-    }
-
-    [Command]
     void CmdAddPlayer() {
         GameDirector gd = GameObject.Find("GameDirector").GetComponent<GameDirector>();
         Debug.Log("My state:");
@@ -111,7 +113,7 @@ public class PlayerController : NetworkBehaviour
 
     public override void OnStartLocalPlayer()
     {
-        GetComponent<Renderer>().material.color = Color.blue;
+        //GetComponent<Renderer>().material.color = Color.blue;
         Debug.Log("LocalPlayer started");
         CmdAddPlayer();
     }

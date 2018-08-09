@@ -20,6 +20,11 @@ public class PlayerStateController : NetworkBehaviour {
         
     }
 
+    [ClientRpc]
+    public void RpcUpdateName( string name ) {
+        gameObject.name = name;
+    }
+
     [Command]
     public void CmdAddScore( int n ) {
         Score += n;
