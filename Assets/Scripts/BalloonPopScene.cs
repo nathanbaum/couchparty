@@ -13,6 +13,7 @@ public class BalloonPopScene : PseudoScene
     private int BalloonsPopped;
     public Transform BalloonSpawnCenter;
     bool Active;
+    public float speed = 15f;
 
 
     // Use this for initialization
@@ -57,7 +58,7 @@ public class BalloonPopScene : PseudoScene
         );
 
         carrot.transform.Rotate(new Vector3(-90, 0, 0));
-        carrot.GetComponent<Rigidbody>().velocity = carrot.transform.forward * 8;
+        carrot.GetComponent<Rigidbody>().velocity = carrot.transform.forward * speed;
         carrot.GetComponent<Carrot>().Owner = GameObject.Find(owner);
 
         NetworkServer.Spawn(carrot);
