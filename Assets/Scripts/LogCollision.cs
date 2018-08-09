@@ -12,7 +12,7 @@ public class LogCollision : MonoBehaviour
         Debug.Log("COLLISION: " + other.gameObject);
         GameObject player = other.gameObject;
         player.GetComponent<PlayerStateController>().CmdTriggerDeath( 3 - GameObject.Find("Scenes").GetComponent<LogRollScene>().PlayersAlive() );
-        player.GetComponent<Renderer>().material = deathColor;
+        player.GetComponent<ChangeMaterial>().UpdateMat(deathColor);
 
     }
 

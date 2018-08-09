@@ -28,6 +28,7 @@ public class GameDirector : NetworkBehaviour {
         }
         Players = players;
         currentScene++;
+
         scenes[currentScene].Run(Players, Next);
     }
 
