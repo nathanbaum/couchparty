@@ -20,15 +20,16 @@ public class PlayerStateController : NetworkBehaviour {
         
     }
 
-    public void AddScore( int n ) {
+    [Command]
+    public void CmdAddScore( int n ) {
         Score += n;
     }
 
     [Command]
-    public void CmdTriggerDeath() {
+    public void CmdTriggerDeath( int score ) {
         IsDead = true;
         Debug.Log("TriggerDeath called");
-        Score = GameObject.Find("Scenes").GetComponent<LogRollScene>().PlayersAlive();
+        Score += score;
     }
 
 }

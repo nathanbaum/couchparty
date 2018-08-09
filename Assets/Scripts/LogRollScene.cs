@@ -135,7 +135,6 @@ public class LogRollScene : PseudoScene {
         yield return null;
     }
 
-	// Update is called once per frame
     public int PlayersAlive(){
         int num = 0;
         for (int i = 0; i < Players.Count; i++)

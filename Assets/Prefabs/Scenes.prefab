@@ -120,6 +120,7 @@ GameObject:
   - component: {fileID: 4598025504690382}
   - component: {fileID: 114670092464492812}
   - component: {fileID: 114390560324616042}
+  - component: {fileID: 114709865980727546}
   - component: {fileID: 114019310948731972}
   m_Layer: 0
   m_Name: Scenes
@@ -1365,7 +1366,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3207957f4aa554cc78f68cd263e1a080, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 50
+  maxSpeed: 200
+  accelTime: 3
   log: {fileID: 1493271611765310}
 --- !u!114 &114070379591855496
 MonoBehaviour:
@@ -1444,7 +1446,23 @@ MonoBehaviour:
   CloudStopPoint: {fileID: 0}
   GameScene: {fileID: 1026622874280548}
   GameInstructions: {fileID: 0}
+  Timer: []
   isJumping: 0
+--- !u!114 &114709865980727546
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1241305735858124}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f00c8fd98ad02458d86ae8d6b8b6ab9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CarrotPrefab: {fileID: 1136153514799392, guid: 2db8aa9121e954efc835034a4efe76b5,
+    type: 2}
+  BalloonPrefab: {fileID: 1569605466267508, guid: 4b2b25abddc0749da8449f827ed00171,
+    type: 2}
 --- !u!114 &114887740975220056
 MonoBehaviour:
   m_ObjectHideFlags: 1

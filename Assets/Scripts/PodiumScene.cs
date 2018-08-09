@@ -41,7 +41,7 @@ public class PodiumScene : PseudoScene
 
     int SortByScore(PlayerStateController p1, PlayerStateController p2)
     {
-        return p1.Score.CompareTo(p2.Score);
+        return p2.Score.CompareTo(p1.Score);
     }
 
     void SetUp()
